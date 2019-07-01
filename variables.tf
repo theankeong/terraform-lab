@@ -4,13 +4,13 @@ variable "resourceprefix" {
 
 variable "loc" {
     description = "Default Azure Region"
-    default = "West Europe"  
+    default = "South East Asia"  
 }
 
-variable " tags" {
-    default = {
-        env = "engineering"
-        dept = "IT"
+variable "tags" {
+    default     = {
+        source  = "citadel"
+        env     = "training"
     }
 }
 
