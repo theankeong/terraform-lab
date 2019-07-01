@@ -1,0 +1,73 @@
+
+resource "azurerm_resource_group" "nsgrg" {
+    name = "${var.resourceprefix}-nsg-rg"
+    location = "${var.loc}"
+    tags = "${var.tags}"
+}
+
+resource " azurerm_network_security_group" "nsg" {
+    name = "${var.resourceprefix}-nsg"
+    resource_group_name = "${azurerm_resource_group.nsgrg.name}"
+    location = "${nsgrg.location}"
+    tags = "${nsgrg.tags}"
+  }
+
+resource "azurerm_network_security_rule" "AllowSSH" {
+    name = "AllowSSH"
+    resource_group_name = "${nsgrg.name}"
+    network_security_group_name = "${azurerm_resource_group.nsgrg.name}"
+  
+    priority = 1010
+    access = "Allow"
+    direction = "Inbound"
+    protocol = "Tcp"
+    destination_port_range = 22
+    destination_address_prefix = "*"
+    source_port_range = "*"
+    source_address_prefix = "*"
+}
+
+resource "azurerm_network_security_rule" "AllowHTTP" {
+    name = "AllowHTTP"
+    resource_group_name = "${nsgrg.name}"
+    network_security_group_name = "${azurerm_resource_group.nsgrg.name}"
+  
+    priority = 1020
+    access = "Allow"
+    direction = "Inbound"
+    protocol = "Tcp"
+    destination_port_range = 80
+    destination_address_prefix = "*"
+    source_port_range = "*"
+    source_address_prefix = "*"
+}
+
+resource "azurerm_network_security_rule" "AllowHTTPS" {
+    name = "AllowHTTPS"
+    resource_group_name = "${nsgrg.name}"
+    network_security_group_name = "${azurerm_resource_group.nsgrg.name}"
+  
+    priority = 1030
+    access = "Allow"
+    direction = "Inbound"
+    protocol = "Tcp"
+    destination_port_range = 443
+    destination_address_prefix = "*"
+    source_port_range = "*"
+    source_address_prefix = "*"
+}
+
+resource "azurerm_network_security_rule" "AllowSQLServer" {
+    name = "AllowSQLServer"
+    resource_group_name = "${nsgrg.name}"
+    network_security_group_name = "${azurerm_resource_group.nsgrg.name}"
+  
+    priority = 1040
+    access = "Allow"
+    direction = "Inbound"
+    protocol = "Tcp"
+    destination_port_range = 1433
+    destination_address_prefix = "*"
+    source_port_range = "*"
+    source_address_prefix = "*"
+}
