@@ -15,5 +15,5 @@ variable "tags" {
 }
 
 variable "ipaddress" {
-    default = "10.0.100.0/24"  
+    default =["10.1.0.0/16"]
 }
