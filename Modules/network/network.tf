@@ -9,24 +9,33 @@ resource "azurerm_virtual_network" "hub-vnet"{
     resource_group_name = "${azurerm_resource_group.vnetrg.name}"
     location = "${azurerm_resource_group.vnetrg.location}"
     address_space = "${var.hub_ipaddress.hub}"
+ }
 
- subnet {
-    name           = "GatewaySubnet"
+resource "azurerm_subnet" "gw-subnet"{
+    name = "GatewaySubnet"
+    resource_group_name = "${azurerm_resource_group.vnetrg.name}"
+    virtual_network_name = "${azurerm_virtual_network.hub-vnet.name}"
     address_prefix = "${var.hub_ipaddress.gw}"
-  }
+}
 
-  subnet {
-    name           = "sharedsvc"
-     address_prefix = "${var.hub_ipaddress.sharedsvc}"
-  }
 
-  subnet {
-    name           = "ext_dmz"
+resource "azurerm_subnet" "ext_dmz-subnet" {
+    name  = "ext_dmz"
+    resource_group_name = "${azurerm_resource_group.vnetrg.name}"
+    virtual_network_name = "${azurerm_virtual_network.hub-vnet.name}"
     address_prefix = "${var.hub_ipaddress.ext_dmz}"
-  }
+}
 
-   subnet {
+resource "azurerm_subnet" "sharedsvc-subnet" {
+    name           = "sharedsvc"
+    resource_group_name = "${azurerm_resource_group.vnetrg.name}"
+    virtual_network_name = "${azurerm_virtual_network.hub-vnet.name}"
+    address_prefix = "${var.hub_ipaddress.sharedsvc}"
+}
+
+resource "azurerm_subnet" "nva-subnet" {
     name           = "nva"
+    resource_group_name = "${azurerm_resource_group.vnetrg.name}"
+    virtual_network_name = "${azurerm_virtual_network.hub-vnet.name}"
     address_prefix = "${var.hub_ipaddress.nva}"
-  }
 }
