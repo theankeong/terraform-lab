@@ -1,1 +1,1 @@
-{"Modules":[{"Source":"./modules/network","Key":"1.network;./modules/network","Version":"","Dir":".terraform/modules/cedbae5c8f7d17bcbd52c6c8b2a13216","Root":""}]}
+{"Modules":[{"Key":"network","Source":"./modules/network","Dir":"Modules\\network"},{"Key":"1.network;./modules/network","Source":"./modules/network","Dir":".terraform/modules/cedbae5c8f7d17bcbd52c6c8b2a13216"},{"Key":"","Source":"","Dir":"."}]}

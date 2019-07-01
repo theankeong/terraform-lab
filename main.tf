@@ -3,5 +3,5 @@ module "network"{
     resourceprefix ="${var.resourceprefix}"
     loc = "${var.loc}"
     tags="${var.tags}"
-    ipaddress = "${var.ipaddress}"
+    hub_ipaddress = "${var.hub_ipaddress}"
 }
