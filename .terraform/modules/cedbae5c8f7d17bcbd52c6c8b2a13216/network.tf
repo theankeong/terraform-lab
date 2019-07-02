@@ -9,7 +9,7 @@ resource "azurerm_virtual_network" "hub-vnet"{
     resource_group_name = "${azurerm_resource_group.vnetrg.name}"
     location = "${azurerm_resource_group.vnetrg.location}"
     address_space = "${var.hub_ipaddress.hub}"
- }
+     }
 
 resource "azurerm_subnet" "gw-subnet"{
     name = "GatewaySubnet"
