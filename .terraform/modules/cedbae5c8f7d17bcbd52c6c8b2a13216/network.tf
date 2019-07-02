@@ -4,32 +4,38 @@ resource "azurerm_resource_group" "vnetrg" {
     tags = "${var.tags}"
 }
 
-resource "azurerm_public_ip" "VPNPublicIP"{
-    name = "vpnGatewayPublicIp"
+resource "azurerm_virtual_network" "hub-vnet"{  
+  name = "${var.resourceprefix}-hub-vnet"
     resource_group_name = "${azurerm_resource_group.vnetrg.name}"
     location = "${azurerm_resource_group.vnetrg.location}"
-    allocation_method = "Dynamic"
+    address_space = "${var.hub_ipaddress.hub}"
+ }
+
+resource "azurerm_subnet" "gw-subnet"{
+    name = "GatewaySubnet"
+    resource_group_name = "${azurerm_resource_group.vnetrg.name}"
+    virtual_network_name = "${azurerm_virtual_network.hub-vnet.name}"
+    address_prefix = "${var.hub_ipaddress.gw}"
 }
 
-resource "azurerm_virtual_network" "core"
-{
-    name = "${var.resourceprefix}-core-vnet"
+
+resource "azurerm_subnet" "ext_dmz-subnet" {
+    name  = "ext_dmz"
     resource_group_name = "${azurerm_resource_group.vnetrg.name}"
-    location = "${azurerm_resource_group.vnetrg.location}"
-    address_space = "${var.ipaddress}"
+    virtual_network_name = "${azurerm_virtual_network.hub-vnet.name}"
+    address_prefix = "${var.hub_ipaddress.ext_dmz}"
+}
 
- subnet {
-    name           = "GatewaySubnet"
-    address_prefix = "10.1.0.0/24"
-  }
+resource "azurerm_subnet" "sharedsvc-subnet" {
+    name           = "sharedsvc"
+    resource_group_name = "${azurerm_resource_group.vnetrg.name}"
+    virtual_network_name = "${azurerm_virtual_network.hub-vnet.name}"
+    address_prefix = "${var.hub_ipaddress.sharedsvc}"
+}
 
-  subnet {
-    name           = "training"
-    address_prefix = "10.1.1.0/24"
-  }
-
-  subnet {
-    name           = "dev"
-    address_prefix = "10.1.2.0/24"
-  }
+resource "azurerm_subnet" "nva-subnet" {
+    name           = "nva"
+    resource_group_name = "${azurerm_resource_group.vnetrg.name}"
+    virtual_network_name = "${azurerm_virtual_network.hub-vnet.name}"
+    address_prefix = "${var.hub_ipaddress.nva}"
 }
