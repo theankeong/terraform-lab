@@ -24,3 +24,11 @@ variable "hub_ipaddress" {
 }
 }
 
+variable "spoke_ipaddress" {
+  default={
+   spoke =["10.2.0.0/16"]
+   web = "10.2.0.0/24"
+   app = "10.2.1.0/24"
+   data = "10.2.2.0/24"
+   }
+}
