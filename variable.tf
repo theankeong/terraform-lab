@@ -20,7 +20,7 @@ variable "hub_ipaddress" {
    gw = "10.1.0.0/24"
    sharedsvc = "10.1.1.0/24"
    ext_dmz = "10.1.2.0/24"
-   nva = "10.1.3.0/24"
+   fw = "10.1.3.0/24"
 }
 }
 

@@ -18,6 +18,12 @@ resource "azurerm_subnet" "gw-subnet"{
     address_prefix = "${var.hub_ipaddress.gw}"
 }
 
+resource "azurerm_subnet" "fw-subnet"{
+    name = "AzureFirewallSubnet"
+    resource_group_name = "${azurerm_resource_group.vnetrg.name}"
+    virtual_network_name = "${azurerm_virtual_network.hub-vnet.name}"
+    address_prefix = "${var.hub_ipaddress.fw}"
+}
 
 resource "azurerm_subnet" "ext_dmz-subnet" {
     name  = "ext_dmz"
@@ -31,11 +37,4 @@ resource "azurerm_subnet" "sharedsvc-subnet" {
     resource_group_name = "${azurerm_resource_group.vnetrg.name}"
     virtual_network_name = "${azurerm_virtual_network.hub-vnet.name}"
     address_prefix = "${var.hub_ipaddress.sharedsvc}"
-}
-
-resource "azurerm_subnet" "nva-subnet" {
-    name           = "nva"
-    resource_group_name = "${azurerm_resource_group.vnetrg.name}"
-    virtual_network_name = "${azurerm_virtual_network.hub-vnet.name}"
-    address_prefix = "${var.hub_ipaddress.nva}"
 }

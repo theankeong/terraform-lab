@@ -13,6 +13,6 @@ module "security"{
     resourceprefix ="${var.resourceprefix}"
     loc = "${var.loc}"
     tags="${var.tags}"
-    nsg_subnet_id = "${module.network.nsg_subnet_id}"
+    vnet_subnet_id = "${module.network.vnet_subnet_id}"
 }
 

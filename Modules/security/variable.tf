@@ -15,7 +15,7 @@ variable "tags" {
 }
 
 
-variable "nsg_subnet_id" {
+variable "vnet_subnet_id" {
  
   }
 
