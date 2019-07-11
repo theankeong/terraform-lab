@@ -5,11 +5,13 @@ resource "azurerm_resource_group" "nsgrg" {
     tags = "${var.tags}"
 }
 
+
 resource "azurerm_network_security_group" "nsg" {
     name = "${var.resourceprefix}-nsg"
     resource_group_name = "${azurerm_resource_group.nsgrg.name}"
     location = "${azurerm_resource_group.nsgrg.location}"
     tags = "${azurerm_resource_group.nsgrg.tags}"
+    
   }
 
 resource "azurerm_network_security_rule" "AllowSSH" {
@@ -80,4 +82,14 @@ resource "azurerm_network_security_rule" "AllowRDP" {
     destination_address_prefix = "*"
     source_port_range = "*"
     source_address_prefix = "*"
+}
+
+resource "azurerm_subnet_network_security_group_association" "nsg_web" {
+  subnet_id                 = "${var.nsg_subnet_id.spoke_web_id}"
+  network_security_group_id = "${azurerm_network_security_group.nsg.id}"
+}
+
+resource "azurerm_subnet_network_security_group_association" "nsg_app" {
+  subnet_id                 = "${var.nsg_subnet_id.spoke_app_id}"
+  network_security_group_id = "${azurerm_network_security_group.nsg.id}"
 }
