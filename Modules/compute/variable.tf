@@ -41,5 +41,5 @@ variable "tags" {
 }
 
 variable "vm_subnet_id" {
-  default = "111"
+  default = ""
 }

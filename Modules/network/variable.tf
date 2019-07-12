@@ -1,10 +1,8 @@
-variable "resourceprefix" {
-   
-  }
-
-variable "loc" {
-    description = "Default Azure Region"
-   
+variable "resource_group" {
+  default     = {
+        name  = "aaa"
+        location = "aaa"
+    }
 }
 
 variable "tags" {
@@ -14,21 +12,25 @@ variable "tags" {
     }
 }
 
-variable "hub_ipaddress" {
-  default={
-   hub =["10.0.0.0/16"]
-   gw = "10.0.0.0/24"
-   sharedsvc = "10.0.1.0/24"
-   ext_dmz = "10.0.0.2/24"
-   nva = "10.0.0.3/24"
-}
-}
+variable "vnet" {
+   default={name = "hub"
+   ipaddress = ["10.0.0.0/16"]} 
+  }
 
-variable "spoke_ipaddress" {
-  default={
-   spoke =["10.0.0.0/16"]
-   web = "10.0.0.0/24"
-   app = "10.0.1.0/24"
-   data = "10.0.2.0/24"
-   }
+variable "subnet" {
+  default=[
+      {name="gw"
+      ipaddress="10.0.0.0/24"},
+
+      {name="web"
+      ipaddress="10.0.1.0/24"},
+
+      {name="app"
+      ipaddress="10.0.2.0/24"},
+
+      {name="data"
+      ipaddress="10.0.3.0/24"}
+
+  ]
+   
 }
