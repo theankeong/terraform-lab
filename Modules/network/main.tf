@@ -1,19 +1,4 @@
-variable "subnets" {
-  default = [
-    {
-      name   = "a"
-      number = 1
-    },
-    {
-      name   = "b"
-      number = 2
-    },
-    {
-      name   = "c"
-      number = 3
-    },
-  ]
-}
+
 
 resource "azurerm_resource_group" "vnetrg" {
     name = "${var.resource_group.name}"
@@ -25,7 +10,13 @@ resource "azurerm_virtual_network" "vnet" {
     resource_group_name = "${azurerm_resource_group.vnetrg.name}"
     location = "${azurerm_resource_group.vnetrg.location}"
     address_space = "${var.vnet.ipaddress}"  
+
+  dynamic "subnet" {
+    for_each = "${var.subnet_numbers}"
+    content{
+      name = subnet.key
+      address_prefix = subnet.value
+    }
+  }
 }
 
-
-for_each = [for s in ""]{}

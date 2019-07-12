@@ -17,20 +17,11 @@ variable "vnet" {
    ipaddress = ["10.0.0.0/16"]} 
   }
 
-variable "subnet" {
-  default=[
-      {name="gw"
-      ipaddress="10.0.0.0/24"},
-
-      {name="web"
-      ipaddress="10.0.1.0/24"},
-
-      {name="app"
-      ipaddress="10.0.2.0/24"},
-
-      {name="data"
-      ipaddress="10.0.3.0/24"}
-
-  ]
-   
+variable "subnet_numbers" {
+  description = "Map from availability zone to the number that should be used for each availability zone's subnet"
+  default     = {
+    "ext_dmz" = "10.0.0.0/24"
+    "web" =  "10.0.1.0/24"
+    "app" =  "10.0.2.0/24"
+  }
 }
