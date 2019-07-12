@@ -1,6 +1,4 @@
-output "spoke_subnet_web_id" {
-  value       = "${azurerm_subnet.web-subnet.id}"
-}
+
 
 output "vnet_subnet_id" {
   value = {
@@ -8,5 +6,6 @@ output "vnet_subnet_id" {
     spoke_web_id ="${azurerm_subnet.web-subnet.id}"
     spoke_app_id = "${azurerm_subnet.app-subnet.id}"
     spoke_data_id = "${azurerm_subnet.data-subnet.id}"
+    hub_shrd_svc_id = "${azurerm_subnet.sharedsvc-subnet.id}"
    }
 }
