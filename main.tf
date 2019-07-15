@@ -1,6 +1,10 @@
 module "hub_network"{
     source = "./modules/network"
-    
+    resource_group = "${var.hub-resource_group}"
+    tags  = "${var.hub-tags}"
+    vnet = "${var.hub-vnet}"
+    subnet_numbers = "${var.hub-subnet_numbers}"
+ 
 
 }
 
