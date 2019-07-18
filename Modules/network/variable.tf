@@ -18,7 +18,6 @@ variable "vnet" {
   }
 
 variable "subnet_numbers" {
-  description = "Map from availability zone to the number that should be used for each availability zone's subnet"
   default     = {
     "ext_dmz" = "10.0.0.0/24"
     "web" =  "10.0.1.0/24"

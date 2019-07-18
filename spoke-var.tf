@@ -1,7 +1,7 @@
 variable "spoke-resource_group" {
   default     = {
         name  = "vnet-rg"
-        location = "vnet-rg"
+        location = "SouthEast Asia"
     }
 }
 

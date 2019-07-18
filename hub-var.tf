@@ -1,7 +1,7 @@
-variable "hub-resource_group" {
+variable "sharedsvc-resource_group" {
   default     = {
-        name  = "vnet-rg"
-        location = "vnet-rg"
+        name  = "sharedsvc-rg"
+        location = "SouthEast Asia"
     }
 }
 
@@ -14,15 +14,14 @@ variable "hub-tags" {
 
 variable "hub-vnet" {
    default={name = "hub-vnet"
-   ipaddress = ["10.1.0.0/16"]} 
+   ipaddress = ["10.0.0.0/22"]} 
   }
 
 variable "hub-subnet_numbers" {
   default     = {
-    "GatewaySubnet" = "10.1.0.0/24"
-    "AzureFirewallSubnet" =  "10.1.1.0/24"
-    "ext-dmz" =  "10.1.2.0/24"
-    "int-dmz" =  "10.1.3.0/24"
-    "shared-svc" =  "10.1.4.0/24"
+    "GatewaySubnet" = "10.0.0.0/24"
+    "ext-dmz" =  "10.0.1.0/24"
+    "int-dmz" =  "10.0.2.0/24"
+    "shared-svc" =  "10.0.3.0/24"
   }
 }
