@@ -1,13 +1,7 @@
-resource "azurerm_resource_group" "vm-rg" {
-  name     = "${var.resource_group.name}"
-  location = "${var.resource_group.location}"
-}
-
-
 resource "azurerm_network_interface" "vm-nic" {
   name                = "${var.vmprofile.vm_name}-nic"
-  location            = "${azurerm_resource_group.vm-rg.location}"
-  resource_group_name = "${azurerm_resource_group.vm-rg.name}"
+  location            = "${var.resource_group.location}"
+  resource_group_name = "${var.resource_group.name}"
 
   ip_configuration {
     name                          = "ipconfiguration1"
@@ -19,7 +13,7 @@ resource "azurerm_network_interface" "vm-nic" {
 resource "azurerm_virtual_machine" "vm" {
   name                  =  "${var.vmprofile.vm_name}"
   location              =  "${var.vmprofile.vm_location}"
-  resource_group_name   = "${azurerm_resource_group.vm-rg.name}"
+  resource_group_name   = "${var.resource_group.name}"
   network_interface_ids = ["${azurerm_network_interface.vm-nic.id}"]
   vm_size               = "${var.vmprofile.vm_size}"
 

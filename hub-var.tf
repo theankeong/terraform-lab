@@ -19,7 +19,8 @@ variable "hub-vnet" {
 
 variable "hub-subnet_numbers" {
   default     = {
-    "GatewaySubnet" = "10.0.0.0/24"
+    "GatewaySubnet" = "10.0.0.0/25"
+    "AzureFirewallSubnet" = "10.0.0.128/25"
     "ext-dmz" =  "10.0.1.0/24"
     "int-dmz" =  "10.0.2.0/24"
     "shared-svc" =  "10.0.3.0/24"
